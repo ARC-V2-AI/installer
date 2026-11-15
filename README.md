@@ -1,10 +1,8 @@
 # ARCI — ARC Installer
 
-**ARCI** is the official system installer for ARC-V2.
+**ARCI** is a system installer script for ARC-V2.
 
 It handles the initial installation of ARC-V2 Core, prepares required system dependencies, and provides an optional component selection step for installing additional ARC services.
-
-**Linux · Automated installation · Development setup**
 
 ## Installation
 
@@ -133,13 +131,3 @@ uv run arc --autofix
 - Git and uv are required.
 - Automatic system dependency installation supports the package managers listed above.
 - Inference models and their configuration are handled separately from ARCI.
-
-## ARC-V2
-
-ARCI is part of the ARC-V2 ecosystem.
-
-- [ARC-V2 Organization](https://github.com/ARC-V2-AI)
-- [ARC-V2 Core](https://github.com/ARC-V2-AI/ARC-V2-Core)
-- [Inference Runtime](https://github.com/ARC-V2-AI/inference-runtime)
-
-**Local-first · Service-oriented · Persistent by design**
