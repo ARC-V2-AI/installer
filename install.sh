@@ -165,4 +165,9 @@ if [[ "$NO_COLOR" -eq 1 ]]; then
 fi
 
 printf 'Starting ARCI...\n\n'
-python3 "$installer_file" "${installer_args[@]}"
+
+if [[ "$have_tty" -eq 1 ]]; then
+    python3 "$installer_file" "${installer_args[@]}" </dev/tty
+else
+    python3 "$installer_file" "${installer_args[@]}"
+fi
