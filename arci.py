@@ -7,6 +7,16 @@ import subprocess
 import sys
 from pathlib import Path
 
+def attach_terminal_input() -> None:
+    """Use the controlling terminal when stdin is occupied by a pipe."""
+    if sys.stdin.isatty():
+        return
+
+    try:
+        sys.stdin = open("/dev/tty", "r", encoding="utf-8")
+    except OSError:
+        pass
+
 CORE_REPOSITORY = "https://github.com/ARC-V2-AI/ARC-V2-Core.git"
 CORE_DIRECTORY = "ARC-V2-Core"
 
@@ -460,6 +470,8 @@ def main() -> int:
 
     parser = build_parser()
     args = parser.parse_args()
+    
+    attach_terminal_input()
 
     USE_COLOR = (
         sys.stdout.isatty()
