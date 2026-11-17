@@ -1,12 +1,49 @@
 # ARCI — ARC Installer
 
-**ARCI** is a system installer script for ARC-V2.
+**ARCI** is the system installer for ARC-V2.
 
 It handles the initial installation of ARC-V2 Core, prepares required system dependencies, and provides an optional component selection step for installing additional ARC services.
 
 ## Installation
 
-Clone the repository or obtain `arci.py`, then run:
+### Quick installation (recommended)
+
+Run the following command to download and start the ARC-V2 installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ARC-V2-AI/installer/main/install.sh | bash
+```
+
+The bootstrap installer provides an interactive installation mode selection:
+
+1. **User / Production** — Installs ARC-V2 Core as a `uv` tool.
+2. **Development** — Clones ARC-V2 Core into the current working directory and installs its development dependencies.
+
+It also asks whether missing system dependencies should be installed automatically.
+
+### Installation options
+
+Options can be passed directly to the bootstrap installer:
+
+```bash
+# Production installation
+curl -fsSL https://raw.githubusercontent.com/ARC-V2-AI/installer/main/install.sh | bash
+
+# Development installation
+curl -fsSL https://raw.githubusercontent.com/ARC-V2-AI/installer/main/install.sh | bash -s -- --development
+
+# Production installation with automatic dependency handling
+curl -fsSL https://raw.githubusercontent.com/ARC-V2-AI/installer/main/install.sh | bash -s -- --automatic-deps
+
+# Non-interactive installation
+curl -fsSL https://raw.githubusercontent.com/ARC-V2-AI/installer/main/install.sh | bash -s -- --automatic-deps --yes
+```
+
+The bootstrap installer downloads the current `arci.py` from the repository and executes it.
+
+### Direct installation
+
+Alternatively, clone the repository or obtain `arci.py` and run it directly:
 
 ```bash
 python arci.py
@@ -55,7 +92,7 @@ The target directory must not already exist.
 ### Examples
 
 ```bash
-# Standard installation
+# Standard production installation
 python arci.py
 
 # Install with automatic dependency handling
@@ -79,7 +116,8 @@ ARCI checks for the tools required to install ARC-V2 Core.
 |---|---|
 | `uv` | Python package and tool management |
 | `git` | Repository cloning and installation |
-| `curl` | Required to install uv automatically |
+| `curl` | Downloading the installer and installing uv automatically |
+| `python3` | Running ARCI |
 
 Automatic dependency installation currently supports:
 
@@ -128,6 +166,7 @@ uv run arc --autofix
 
 - Linux is currently the only supported operating system.
 - ARC-V2 Core requires Python 3.11 or newer.
-- Git and uv are required.
+- Bash, curl, and Python 3 are required for the bootstrap installer.
+- Git and uv are required by ARCI.
 - Automatic system dependency installation supports the package managers listed above.
 - Inference models and their configuration are handled separately from ARCI.
